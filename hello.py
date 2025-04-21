@@ -10,21 +10,6 @@ connect()
 df = get_df('student-scores')
 print(df.head())
 
-# Checkbox: Show full dataset
-if checkbox("Show full dataset"):
-    table(df, title="Full Student Data")
-
-# Dropdown: Select category to filter
-FIRST_NAME = dropdown("Select FIRST_NAME", options=df["FIRST_NAME"].dropna().unique().tolist(), default=None)
-if FIRST_NAME:
-    table(df[df["FIRST_NAME"] == FIRST_NAME], title=f"Students in {FIRST_NAME} FIRST_NAME")
-
-# Radio Buttons: Sort order
-sort_order = radio("Sort by ABSENCE_DAYS", options=["Ascending", "Descending"], default="Ascending")
-sorted_df = df.sort_values("ABSENCE_DAYS", ascending=(sort_order == "Ascending"))
-table(sorted_df, title="Sorted by Absence Days")
-
-
 # SQL: Query manipulation
 sql = "SELECT * from student-scores where ABSENCE_DAYS > 5"
 filtered_df = query(sql, "student-scores")
